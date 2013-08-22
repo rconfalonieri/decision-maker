@@ -1,0 +1,41 @@
+
+% Location preferences (lives in santsmontjuic)
+40 loc_Sants :- loc_Ciutat_Vella.
+40 loc_Sants :- loc_Gracia.
+60 loc_Sants :- loc_Les_Corts.
+60 loc_Sants :- loc_Eixample.
+40 loc_Sants :- loc_Villa_Olimpica.
+60 loc_Sants :- loc_sarriasantgervasi.
+
+% Access preferences
+70 access_L3 x access_L2.
+
+% Cost Preferences
+70 cost_2 x cost_3.
+
+% Rate Preferences
+80 rate_3 x rate_0.
+
+% Requirements
+100 req_discapacitados.
+
+% Type Preferences
+
+% Cinema preferences
+80 type_Comedia x type_Terror :- pet_cinema.
+60 type_Drama :- pet_cinema.
+
+% Restaurant preferences
+90 type_Mediterraneos x type_Vegetarianos :- pet_restaurant.
+80 type_Cafes :- time_15_18h, pet_restaurant.
+90 req_terraza :- not weather_Rains, time_15_18h, pet_restaurant.
+
+% Night preferences
+90 type_Jazz :- pet_night.
+70 type_Copas x type_Discotecas :- pet_night.
+
+% User context
+100 pet_restaurant.
+100 loc_Les_Corts.
+100 time_13_15h.
+100 weather_raining.

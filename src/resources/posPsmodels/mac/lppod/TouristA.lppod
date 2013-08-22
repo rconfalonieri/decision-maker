@@ -1,0 +1,42 @@
+% Location preferences (lodges in Gracia)
+40 loc_Gracia :- loc_CiutatVella.
+40 loc_Gracia :- loc_Sants.
+60 loc_Gracia :- loc_LesCorts.
+60 loc_Gracia :- loc_Eixample.
+40 loc_Gracia :- loc_SantMarti.
+60 loc_Gracia :- loc_SarriaSantGervasi.
+
+% Access preferences
+80 access_L3 x access_L4.
+
+% Cost Preferences
+70 cost_3 x cost_4.
+
+% Rate Preferences
+60 rate_3 x rate_4.
+
+% Requirements
+100 req_MasterCard x req_Visa :- pet_Restaurant.
+100 req_Terrace :- pet_Restaurant, time_13_15h, not weather_Rain.
+
+
+% Type Preferences
+
+% Cinema preferences
+80 type_VOSE x type_Spanish :- pet_Cinema.
+60 type_Horror x type_Action :- pet_Cinema.
+
+% Restaurant preferences 
+70 type_Catalan x type_Peruvian :- pet_Restaurant, time_13_15h.
+80 type_CoffeeShop :- pet_Restaurant, time_16_18h.
+
+% Night preferences 
+90 type_Flamenco x type_Jazz :- pet_Night, time_20_22h.
+90 type_Pub :- pet_Night, time_22_24h.
+
+% User context
+100 pet_Restaurant.
+100 loc_Sants.
+100 time_13_15h.
+100 weather_Rain.
+100 -access_L3.
