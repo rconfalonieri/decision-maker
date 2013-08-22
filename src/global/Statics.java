@@ -9,18 +9,15 @@ import java.util.Vector;
 
 public class Statics {
 
-	public static final boolean ARGUMENTATION_MANAGER_DEBUG = false;
-	public static final boolean INFERENCE_DEBUG = false;
-	public static final boolean DEBUG_DLV_REASONER = true;
-	public static final boolean DEBUG_DECISION_MAKER_REASONER = true;
-	public static final boolean DEBUG_PSMODELS_REASONER = true;
-	public static final boolean DEBUG_POSPSMODELS_REASONER = true;
+	public static final boolean DEBUG_DLV_REASONER = false;
+	public static final boolean DEBUG_DECISION_MAKER_REASONER = false;
+	public static final boolean DEBUG_PSMODELS_REASONER = false;
+	public static final boolean DEBUG_POSPSMODELS_REASONER = false;
 	public static final boolean DLV_DISJUNTIVE_IMPLEMENTATION = true;
-	public static final boolean DEBUG_POSPSMODELS_DECISION_MAKER = true;
+	public static final boolean DEBUG_POSPSMODELS_DECISION_MAKER = false;
+	public static final boolean GUI_DETAILS = true;
 	private static Vector verbose = new Vector(); // Verbose vector.
-	public static int equivalences = 0; // Number of equivalent decisions.
-	public static boolean equivalence = false; // Is there an equivalence ? 
-	public static boolean verboseBool = true;
+	
 
 	public static void add(String log) {
 
@@ -48,7 +45,7 @@ public class Statics {
 			//p = Runtime.getRuntime().exec(run,null,new File("./reasoner"));
 			p = Runtime.getRuntime().exec(run,null,new File(reasonerPath));
 		}
-		System.out.println("Permissions changed");
+		//System.out.println("Permissions changed");
 	}
 
 	
