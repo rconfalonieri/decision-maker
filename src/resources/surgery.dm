@@ -9,7 +9,7 @@ se :- sg ; 1.0
 -ll :- sg ; 1.0
 ll :- ca,-sg ; 1.0
 -ll :- -ca ; 1.0
-ca :- cp ; 0.7
+ca :- cp ; 0.3
 cp ; 1.0
 
 %% Preferences :
