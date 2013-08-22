@@ -26,7 +26,7 @@ public class ASPModelWrapper extends ModelWrapper {
 				//System.out.println("setLiterals-> "+line);
 				model = new ArrayList<String>();
 				lineSplitted = line.split(" ");
-				System.out.println("lineSplitted-> "+lineSplitted.length);
+				//System.out.println("lineSplitted-> "+lineSplitted.length);
 				for (int i=0;i<lineSplitted.length;i++) {
 					if (!lineSplitted[i].contains("Stable") && !lineSplitted[i].contains("Model") && !lineSplitted[i].contains("*")) {
 						//System.out.println("literal-> "+lineSplitted[i]);

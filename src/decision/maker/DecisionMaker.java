@@ -37,10 +37,10 @@ public class DecisionMaker extends Agent {
 
 	}
 
-	/*
-	public DecisionMaker(String string, ArrayList<Knowledge> formulasVector,
-			ArrayList<Knowledge> formulasVector2) {
-		super(string,formulasVector,formulasVector2);
+	
+	/*public DecisionMaker(String name, ArrayList<Knowledge> knowledge,
+			ArrayList<Knowledge> preference,ArrayList<Knowledge> decision) {
+		super(name,knowledge,preference,decision);
 
 	}*/
 

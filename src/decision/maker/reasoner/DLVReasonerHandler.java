@@ -165,8 +165,10 @@ public class DLVReasonerHandler implements IReasonerHandler {
 		}
 		if (Statics.DEBUG_DLV_REASONER) {
 			System.out.println("pessimisticDecisionMakingToDLV() program is: "+dlvEnconding);
-			Statics.add("Generated program is: "+dlvEnconding);
+			//System.out.println("Generated program is: "+dlvEnconding);
 		}
+		if (Statics.GUI_DETAILS)
+			Statics.add("Generated program is: "+dlvEnconding);
 		return dlvEnconding;
 	}
 
@@ -213,8 +215,10 @@ public class DLVReasonerHandler implements IReasonerHandler {
 		}
 		if (Statics.DEBUG_DLV_REASONER) {
 			System.out.println("optimisticDecisionMakingToDLV() program is: "+dlvEnconding);
-			Statics.add("Genereated program is: "+dlvEnconding);
+			
 		}
+		if (Statics.GUI_DETAILS)
+			Statics.add("Genereated program is: "+dlvEnconding);
 		return dlvEnconding;
 	}
 
@@ -292,18 +296,18 @@ public class DLVReasonerHandler implements IReasonerHandler {
 			}
 			dlvErrors =invocation.getErrors();
 			if (dlvErrors!=null && dlvErrors.size()>0)
-				Statics.add("Errors in DVL");
+				System.out.println("Errors in DVL");
 		}
 		catch (DLVInvocationException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
-			Statics.add("DLVInvocationException2");
-			Statics.add(getStackTrace(e));
+			System.out.println("DLVInvocationException2");
+			System.out.println(getStackTrace(e));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
-			Statics.add("IOException");
-			Statics.add(getStackTrace(e));
+			System.out.println("IOException");
+			System.out.println(getStackTrace(e));
 		}
 		finally {
 			return extensions;
@@ -315,15 +319,15 @@ public class DLVReasonerHandler implements IReasonerHandler {
 
 
 	public void testSolver() {
-		Statics.add("testDLVSpolver");
+		System.out.println("testDLVSpolver");
 		Vector solutions = computeAcceptableArguments();
 		ArrayList<String> solution;
 		if (solutions!=null) {
 			for (int i=0; i<solutions.size();i++) {
-				Statics.add("Model "+(i+1)+":");
+				System.out.println("Model "+(i+1)+":");
 				solution = (ArrayList<String>) solutions.get(i);
 				for (int j=0; j<solution.size();j++)
-					Statics.add(solution.get(j).toString());
+					System.out.println(solution.get(j).toString());
 			}
 		}
 	}

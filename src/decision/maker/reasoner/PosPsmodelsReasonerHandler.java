@@ -119,8 +119,11 @@ public class PosPsmodelsReasonerHandler implements IReasonerHandler {
 		}
 		if (Statics.DEBUG_POSPSMODELS_REASONER) {
 			System.out.println("optimisticDecisionMakingToLP() program is: "+posPsmodelsEnconding);
-			Statics.add("Generated program is: "+posPsmodelsEnconding);
+			
 		}
+		if (Statics.GUI_DETAILS)
+			Statics.add("Generated program is: "+posPsmodelsEnconding);
+		
 		return posPsmodelsEnconding;
 	}
 
@@ -148,8 +151,11 @@ public class PosPsmodelsReasonerHandler implements IReasonerHandler {
 		}
 		if (Statics.DEBUG_POSPSMODELS_REASONER) {
 			System.out.println("pessimisticDecisionMakingToLP() program is: "+posPsmodelsEnconding);
-			Statics.add("Generated program is: "+posPsmodelsEnconding);
+			
 		}
+		if (Statics.GUI_DETAILS)
+			Statics.add("Generated program is: "+posPsmodelsEnconding);
+		
 		return posPsmodelsEnconding;
 	}
 
@@ -157,7 +163,8 @@ public class PosPsmodelsReasonerHandler implements IReasonerHandler {
 	public Vector computeDecisionMaking(String logicProgrammingEncoding) {
 		PrintWriter out = null;
 		String f = PATH_REASONER_RESOURCES+System.getProperty("file.separator")+"lppod"+System.getProperty("file.separator")+"decisionmaking.lppod";
-		System.out.println("computeDecisionMaking()->lppodFile: "+f);
+		if (Statics.DEBUG_POSPSMODELS_REASONER) 
+			System.out.println("computeDecisionMaking()->lppodFile: "+f);
 		try {
 			out = new PrintWriter(PATH_REASONER_RESOURCES+System.getProperty("file.separator")+"lppod"+System.getProperty("file.separator")+"decisionmaking.lppod");
 		} catch (FileNotFoundException e) {
@@ -177,7 +184,8 @@ public class PosPsmodelsReasonerHandler implements IReasonerHandler {
 		ManagePASPInputFile manage = new ManagePASPInputFile(PATH_REASONER_RESOURCES, "decisionmaking.lppod");
 		vector = manage.invokeAndCreateInput("",PATH_REASONER);
 		
-		System.out.println("after invoking posPsmodels");
+		if (Statics.DEBUG_POSPSMODELS_REASONER) 
+			System.out.println("after invoking posPsmodels");
 		
 		return vector;
 	}

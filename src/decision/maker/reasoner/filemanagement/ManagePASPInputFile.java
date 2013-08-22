@@ -33,7 +33,9 @@ public class ManagePASPInputFile extends ManageInputFile {
 
 			//run = psmodelsPath+" "+reasonerPath+"/tmp";
 			String run = "./posPsmodels lppod"+System.getProperty("file.separator")+fileName+" "+posPosmodelsOptionCommand;
-			System.out.println("posPsmodels "+run);
+			
+			if (Statics.DEBUG_POSPSMODELS_REASONER) 
+				System.out.println("posPsmodels "+run);
 			p = Runtime.getRuntime().exec(run,null,new File(reasonerPath));
 
 			//reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -51,10 +53,12 @@ public class ManagePASPInputFile extends ManageInputFile {
 			p.getOutputStream().close(); //http://saloon.javaranch.com/cgi-bin/ubb/ultimatebb.cgi?ubb=get_topic&f=38&t=000997
 			p.destroy();
 
-			System.out.println("PASPModelWrapper created...");
+			if (Statics.DEBUG_POSPSMODELS_REASONER) 
+				System.out.println("PASPModelWrapper created...");
 
 			if (modelsWrapper.getModels()==null) {
-				System.out.println("No possibilistic models found");
+				if (Statics.DEBUG_POSPSMODELS_REASONER) 
+					System.out.println("No possibilistic models found");
 				vector = modelsWrapper.getModels();
 			}
 			else { 
@@ -98,10 +102,12 @@ public class ManagePASPInputFile extends ManageInputFile {
 
 			for(File file: folder.listFiles()) {
 				if(file.delete()){
-					System.out.println(file.getName() + " is deleted!");
+					if (Statics.DEBUG_POSPSMODELS_REASONER) 
+						System.out.println(file.getName() + " is deleted!");
 				}
 				else{
-					System.out.println("Delete operation is failed.");
+					if (Statics.DEBUG_POSPSMODELS_REASONER) 
+						System.out.println("Delete operation is failed.");
 				}
 			}
 		}

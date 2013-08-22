@@ -22,9 +22,9 @@ public abstract class ManageInputFile {
 			File file = new File(fileToDelete[i]);
 
 			if(file.delete()){
-				System.out.println(file.getName() + " is deleted!");
+				//System.out.println(file.getName() + " is deleted!");
 			}else{
-				System.out.println("Delete operation is failed.");
+				//System.out.println("Delete operation is failed.");
 			}
 		}
 	}

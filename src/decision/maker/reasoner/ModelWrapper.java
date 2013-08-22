@@ -25,14 +25,14 @@ public abstract class ModelWrapper {
 		try {
 			InputStreamReader isr = new InputStreamReader(is);
 			BufferedReader br = new BufferedReader(isr);
-			System.out.println("File loaded, start ");
+			//System.out.println("File loaded, start ");
 			setLiterals(br);
 			p.getErrorStream().close();
 			p.getInputStream().close();
 			p.getOutputStream().close();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
-			System.out.println("parsing failed");
+			System.out.println("ModelWrapper->parsing failed");
 			System.exit(-1);
 		}
 

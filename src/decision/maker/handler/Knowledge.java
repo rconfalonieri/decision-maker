@@ -32,20 +32,21 @@ public class Knowledge {
 			original = line;
 			String[] tab = line.split(" ; ");
 
-			System.out.println("Knowledge "+original);
+			//System.out.println("Knowledge "+original);
 			if (tab.length == 2) {
-				System.out.println("weighted ");
+				//System.out.println("weighted ");
 				this.weight = Double.parseDouble(tab[1]);
 				this.rule = tab[0].substring(0,tab[0].length()-1);
 			}
 			// it is a decision
 			else {
-				System.out.println("decision "+original);
+				//System.out.println("decision "+original);
 				this.rule = tab[0].trim();
+				this.weight = -1;
 			}
 		}
 		else {
-			System.out.println("no parsing "+line);
+			//System.out.println("no parsing "+line);
 			this.rule = line;
 		}
 
@@ -95,6 +96,25 @@ public class Knowledge {
 	{
 		return original;
 
+	}
+
+
+	public String toFileFormat() {
+		
+		String result = "";
+		result += rule.replace(".", "");
+		if (weight!=-1) {
+			result += " ; ";
+			result += weight;
+		}
+		//do nothing is a decision
+		else
+		{
+			
+		}
+		
+		return result;
+		
 	}
 
 

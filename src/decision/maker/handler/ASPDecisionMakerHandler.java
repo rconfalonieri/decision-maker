@@ -203,23 +203,23 @@ public class ASPDecisionMakerHandler extends DecisionMakerHandler {
 						System.out.println("after getDecisionLiteral "+decision);
 
 					if (decision!=null) {
-						System.out.println("Decision is "+decision);
+						//System.out.println("Decision is "+decision);
 						if (pessimisticLabel==null) {
-							System.out.println("Pess label crated "+decision);
+							//System.out.println("Pess label crated "+decision);
 							decisions = new ArrayList<String>();
 							pessimisticLabel = new BestDecision();
 							pessimisticLabel.setUtility(utility);
-							System.out.println("Adding "+decision);
+							//System.out.println("Adding "+decision);
 							decisions.add(decision);
 						}
 						else {
-							System.out.println("Adding "+decision);
+							//System.out.println("Adding "+decision);
 							decisions.add(decision);
 						}
 
 					}
 					if (pessimisticLabel!=null && decisions!=null) {
-						System.out.println("setting "+decisions.size());
+						//System.out.println("setting "+decisions.size());
 						pessimisticLabel.setDecision(decisions);
 					}
 				}

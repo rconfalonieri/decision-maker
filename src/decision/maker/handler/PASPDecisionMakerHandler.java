@@ -183,7 +183,10 @@ public class PASPDecisionMakerHandler extends DecisionMakerHandler {
 			for (int i=0;i<possibilisticModels.size();i++) {
 
 				if (checkPossibilisticSatisfability((ArrayList<String>) possibilisticModels.get(i),preferenceBaseCut)) {
-					System.out.println("Possibilistic Model "+(i+1)+ "Preferences satisfied..");
+					
+					if (Statics.DEBUG_POSPSMODELS_DECISION_MAKER)
+						System.out.println("Possibilistic Model "+(i+1)+" Preferences satisfied..");
+					
 					ArrayList<String> decisions = null;
 					for (int j=0;j<decisionsAvailable.size();j++) {
 						//for (int j=0;j<models.size();j++) {
@@ -195,23 +198,26 @@ public class PASPDecisionMakerHandler extends DecisionMakerHandler {
 							System.out.println("after getDecisionLiteral "+decision);
 
 						if (decision!=null) {
-							System.out.println("Decision is "+decision);
+							if (Statics.DEBUG_POSPSMODELS_DECISION_MAKER)
+								System.out.println("Decision is "+decision);
 							if (pessimisticLabel==null) {
-								System.out.println("Pess label crated "+decision);
+								if (Statics.DEBUG_POSPSMODELS_DECISION_MAKER)
+									System.out.println("Pess label crated "+decision);
 								decisions = new ArrayList<String>();
 								pessimisticLabel = new BestDecision();
 								pessimisticLabel.setUtility(1-utility);
-								System.out.println("Adding "+decision);
+								//System.out.println("Adding "+decision);
 								decisions.add(decision);
 							}
 							else {
-								System.out.println("Adding "+decision);
+								//System.out.println("Adding "+decision);
 								decisions.add(decision);
 							}
 
 						}
 						if (pessimisticLabel!=null && decisions!=null) {
-							System.out.println("setting "+decisions.size());
+							if (Statics.DEBUG_POSPSMODELS_DECISION_MAKER)
+								System.out.println("setting "+decisions.size());
 							pessimisticLabel.setDecision(decisions);
 						}
 						//}
@@ -219,7 +225,8 @@ public class PASPDecisionMakerHandler extends DecisionMakerHandler {
 
 				}
 				else {
-					System.out.println("Possibilistic Model "+(i+1)+ "Preferences not satisfied..");
+					if (Statics.DEBUG_POSPSMODELS_DECISION_MAKER)
+						System.out.println("Possibilistic Model "+(i+1)+ " Preferences not satisfied..");
 				}	
 			}
 
@@ -362,7 +369,8 @@ public class PASPDecisionMakerHandler extends DecisionMakerHandler {
 			}
 
 		}
-		System.out.println("checkPossibilisticSatisfability()->"+(nrPrioritisedPreferences==preferenceBaseCut.size()));
+		if (Statics.DEBUG_POSPSMODELS_DECISION_MAKER)
+			System.out.println("checkPossibilisticSatisfability()->"+(nrPrioritisedPreferences==preferenceBaseCut.size()));
 		return (nrPrioritisedPreferences==preferenceBaseCut.size());
 	}
 

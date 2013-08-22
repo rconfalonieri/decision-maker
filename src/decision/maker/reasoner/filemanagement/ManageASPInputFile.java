@@ -37,7 +37,8 @@ public class ManageASPInputFile extends ManageInputFile {
 			String run = "./lparse "+lparseOptionCommand+" "+fileName;//+ " > tmp"; //"+reasonerPath+"/tmp";
 			//String[] run = {reasonerPath+"/./lparse","--true-negation","--cardinality-optimal",fileName,"> tmp"};
 
-			System.out.println("lparse "+run);
+			if (Statics.DEBUG_PSMODELS_REASONER)
+				System.out.println("lparse "+run);
 			//p = Runtime.getRuntime().exec(run); 
 
 
@@ -53,11 +54,12 @@ public class ManageASPInputFile extends ManageInputFile {
 				p.destroy();
 
 			}
-			System.out.println("after lparse");
+			if (Statics.DEBUG_PSMODELS_REASONER)
+				System.out.println("after lparse");
 			if (!new File(reasonerPath+System.getProperty("file.separator")+"tmp").exists()){
 				//if (!new File("/tmp/out").exists()){
 
-				System.out.println("Error!");
+				System.out.println("ManageASPInputFile->Error!");
 			}
 
 			p.getErrorStream().close(); //close the streams even if not accessed, it looks like it's a bug
@@ -69,7 +71,8 @@ public class ManageASPInputFile extends ManageInputFile {
 
 			//run = psmodelsPath+" "+reasonerPath+"/tmp";
 			String run2 = "./psmodels 0 tmp";
-			System.out.println("psmodels "+run2);
+			if (Statics.DEBUG_PSMODELS_REASONER)
+				System.out.println("psmodels "+run2);
 			p = Runtime.getRuntime().exec(run2,null,new File(reasonerPath));
 
 			//p = Runtime.getRuntime().exec(run);  
@@ -89,10 +92,12 @@ public class ManageASPInputFile extends ManageInputFile {
 			p.getOutputStream().close(); //http://saloon.javaranch.com/cgi-bin/ubb/ultimatebb.cgi?ubb=get_topic&f=38&t=000997
 			p.destroy();
 
-			System.out.println("ASPModelWrapper created...");
+			if (Statics.DEBUG_PSMODELS_REASONER)
+				System.out.println("ASPModelWrapper created...");
 
 			if (modelsWrapper.getModels()==null) {
-				System.out.println("No models found");
+				if (Statics.DEBUG_PSMODELS_REASONER)
+					System.out.println("No models found");
 				vector = modelsWrapper.getModels();
 			}
 			else { 

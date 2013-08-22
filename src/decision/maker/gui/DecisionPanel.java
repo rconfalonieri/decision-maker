@@ -293,10 +293,11 @@ public class DecisionPanel implements ActionListener {
 	
 	private void linkIHM2Agent() {
 
+		
 		/*decisionMaker = new DecisionMaker("Stand alone Decision Tool agent",
-				kPrompt.getFormulasVector(new ArrayList<String>()),
-				gPrompt.getFormulasVector(new ArrayList<String>())
-				xPrompt.getFormulasVector(new ArrayList<String>()));*/
+				kPrompt.getFormulasVector(),
+				gPrompt.getFormulasVector()
+				xPrompt.getFormulasVector());*/
 	}
 
 	/**
@@ -317,7 +318,7 @@ public class DecisionPanel implements ActionListener {
 
 	
 	/**
-	 * save the agent information in a file .agt
+	 * save the agent information in a file .dm
 	 * @param outputFile
 	 * @throws IOException
 	 */
@@ -340,27 +341,32 @@ public class DecisionPanel implements ActionListener {
 
 		outputStream.write(decisionMaker.getName().getBytes());
 		outputStream.write("\n\n%% Knowledge  :\n\n".getBytes());
-
-		int dimK = decisionMaker.getKnowledgeBase().size();
-		for (int i=0; i<dimK; i++) {
-			outputStream.write((decisionMaker.getKnowledgeBase().get(i)+"\n").getBytes());
+		
+		ArrayList<Knowledge> knowledge = kPrompt.getFormulasVector();
+		
+		for (int i=0; i<knowledge.size(); i++) {
+			//System.out.println("Know "+knowledge.get(i).toFileFormat());
+			outputStream.write((knowledge.get(i).toFileFormat()+"\n").getBytes());
 		}
 
 		outputStream.write("\n\n%% Preferences :\n\n".getBytes());
 
-		int dimG = decisionMaker.getPreferenceBase().size();
-		for (int i=0; i<dimG; i++) {
-			outputStream.write(((Knowledge) decisionMaker.getPreferenceBase().get(i)+"\n").getBytes());
+		ArrayList<Knowledge> preferences = gPrompt.getFormulasVector();
+		
+		for (int i=0; i<preferences.size(); i++) {
+			//System.out.println("Pref "+preferences.get(i).toFileFormat());
+			outputStream.write((preferences.get(i).toFileFormat()+"\n").getBytes());
 		}
 		
 		outputStream.write("\n\n%% Decisions :\n\n".getBytes());
 
-		int dimDec = decisionMaker.getDecisions().size();
-		for (int i=0; i<dimDec; i++) {
-			outputStream.write(((Knowledge) decisionMaker.getDecisions().get(i)+"\n").getBytes());
+		//System.out.println("parsing decisions...");
+		ArrayList<Knowledge> decisions = xPrompt.getFormulasVector();
+		
+		for (int i=0; i<decisions.size(); i++) {
+			//System.out.println("Dec "+decisions.get(i).toFileFormat());
+			outputStream.write((decisions.get(i).toFileFormat().replace(" ; 0.0", "")+"\n").getBytes());
 		}
-		
-		
 
 		outputStream.close();
 	}

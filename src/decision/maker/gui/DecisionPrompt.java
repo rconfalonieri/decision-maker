@@ -262,10 +262,12 @@ public class DecisionPrompt extends JPanel implements KeyListener,MouseListener,
 			// We have to make the difference between the two builders
 			// (with and without the weights) :
 			if (hasWeights) {
+				//System.out.println("getFormulasVector "+formulas.get(i)+" "+Double.parseDouble((String) weightsL.get(i)));
 				forms.add(new Knowledge( (String) formulas.get(i), Double.parseDouble((String) weightsL.get(i))) );
 				//forms.add(new Knowledge((String) formulas.get(i),false));
 			}
 			else {
+				//System.out.println("getFormulasVector "+formulas.get(i));
 				forms.add(new Knowledge( ((String) formulas.get(i)).trim(),false));
 			} 
 		}

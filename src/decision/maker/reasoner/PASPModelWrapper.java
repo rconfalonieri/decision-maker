@@ -40,7 +40,7 @@ public class PASPModelWrapper extends ModelWrapper {
 				models.add(possibilisticModel);
 			}
 			if (line.contains("No possibilistic models")) {
-				System.out.println("No possibilistic models found");
+				//System.out.println("No possibilistic models found");
 			}
 		}
 

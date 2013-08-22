@@ -16,12 +16,12 @@ import decision.maker.reasoner.PosPsmodelsReasonerHandler;
 import decision.maker.reasoner.PsmodelsReasonerHandler;
 
 public abstract class DecisionMakerHandler {
-	
+
 	protected ArrayList<Knowledge> knowledgeBase;
 	protected ArrayList<Knowledge> preferenceBase;
 	protected ArrayList<Knowledge> decisions;
 	protected ArrayList<Double> strata;
-	
+
 	protected IReasonerHandler reasonerHandler;
 	protected ArrayList<WeightedRule> stratifiedKnowledgeBase;
 	protected ArrayList<WeightedRule> proritizedPreferences;
@@ -29,7 +29,7 @@ public abstract class DecisionMakerHandler {
 	protected ArrayList<WeightedRule> preferenceBaseCut;
 	protected ArrayList<String> decisionsAvailable;
 	protected JPanel panel;
-	
+
 	private boolean guiCheckOk;
 
 	//public abstract void testSolver();
@@ -40,21 +40,21 @@ public abstract class DecisionMakerHandler {
 	public abstract BestDecision computeOptimisticDecision(double alpha);
 	public abstract String getDecisionLiteral(ArrayList<String> models,String decisionLiteral);
 
-	
+
 	public DecisionMakerHandler(ArrayList<Knowledge> knowledgeBase, ArrayList<Knowledge> preferenceBase, ArrayList<Knowledge> decisions, JPanel panel, String reasoner)
 	{
 		stratifiedKnowledgeBase = new ArrayList<WeightedRule>();
 		proritizedPreferences = new ArrayList<WeightedRule>();
 		decisionsAvailable = new ArrayList<String>();
-		
+
 		//setReasonerPath(reasoner);
 		this.knowledgeBase = knowledgeBase;
 		this.preferenceBase = preferenceBase;
 		this.decisions = decisions;
 		this.panel = panel;
-		
-		
-		
+
+
+
 		setStratifiedKnowledgeBase();
 		if (Statics.DEBUG_DECISION_MAKER_REASONER) {
 			System.out.println("stratifiedKnowledgeBase");
@@ -80,35 +80,35 @@ public abstract class DecisionMakerHandler {
 		if (stratifiedKnowledgeBase.size()==0 || proritizedPreferences.size()==0 || decisionsAvailable.size()==0) {
 
 			if (stratifiedKnowledgeBase.size()==0 )
-				if (Statics.DEBUG_DECISION_MAKER_REASONER) {
-					System.out.println("Knowledge missing!");
-					//Statics.add("Knowledge missing!");
-					guiCheckOk = false;
-					JOptionPane.showMessageDialog(panel, "Knowledge missing!");
-					//System.exit(-1);
-				}
+				//if (Statics.DEBUG_DECISION_MAKER_REASONER) {
+				System.out.println("Knowledge missing!");
+			//Statics.add("Knowledge missing!");
+			guiCheckOk = false;
+			JOptionPane.showMessageDialog(panel, "Knowledge missing!");
+			//System.exit(-1);
+			//}
 			if (proritizedPreferences.size()==0)
-				if (Statics.DEBUG_DECISION_MAKER_REASONER) {
-					System.out.println("Preferences missing!");
-					//Statics.add("Preferences missing!");
-					guiCheckOk = false;
-					JOptionPane.showMessageDialog(panel, "Preferences missing!");
-					//System.exit(-1);
-				}
+				//if (Statics.DEBUG_DECISION_MAKER_REASONER) {
+				System.out.println("Preferences missing!");
+			//Statics.add("Preferences missing!");
+			guiCheckOk = false;
+			JOptionPane.showMessageDialog(panel, "Preferences missing!");
+			//System.exit(-1);
+			//}
 			if (decisionsAvailable.size()==0)
-				if (Statics.DEBUG_DECISION_MAKER_REASONER) {
-					System.out.println("Decisions missing!");
-					//Statics.add("Decisions missing!");
-					guiCheckOk = false;
-					JOptionPane.showMessageDialog(panel, "Decisions missing!");
-					//System.exit(-1);
-				}
+				//if (Statics.DEBUG_DECISION_MAKER_REASONER) {
+				System.out.println("Decisions missing!");
+			//Statics.add("Decisions missing!");
+			guiCheckOk = false;
+			JOptionPane.showMessageDialog(panel, "Decisions missing!");
+			//System.exit(-1);
+			//}
 		}
 		else 
 			guiCheckOk = true;
 
 	}
-	
+
 	public void setDecisions() {
 
 		Knowledge formula;
@@ -160,7 +160,7 @@ public abstract class DecisionMakerHandler {
 				System.out.println(strata.get(i));
 		}
 	}
-	
+
 	public void setStratifiedKnowledgeBase() {
 		Knowledge formula;
 		String rule;
@@ -235,14 +235,14 @@ public abstract class DecisionMakerHandler {
 			}
 		}
 		if (Statics.DEBUG_DECISION_MAKER_REASONER) {
-		System.out.println("preferenceBaseCut "+priority);
-		for (int i=0;i<preferenceBaseCut.size();i++)
-			System.out.println(preferenceBaseCut.get(i).getWeight()+":"+ preferenceBaseCut.get(i).getRule());
-	}
+			System.out.println("preferenceBaseCut "+priority);
+			for (int i=0;i<preferenceBaseCut.size();i++)
+				System.out.println(preferenceBaseCut.get(i).getWeight()+":"+ preferenceBaseCut.get(i).getRule());
+		}
 
 		return preferenceBaseCut;
 	}
-	
+
 	public double increaseAlpha(double alpha) {
 
 
@@ -260,7 +260,7 @@ public abstract class DecisionMakerHandler {
 		return -1;
 
 	}
-	
+
 	public double decreaseBeta(double beta) {
 
 
@@ -283,7 +283,7 @@ public abstract class DecisionMakerHandler {
 		return -1;
 
 	}
-	
+
 
 	public void convertInputKnowledge(ArrayList<Knowledge> knowledgeBase,ArrayList<Knowledge> preferenceBase,ArrayList<Knowledge> decisions) {
 		Knowledge formula;
@@ -329,6 +329,6 @@ public abstract class DecisionMakerHandler {
 	public void setGuiCheckOk(boolean guiCheckOk) {
 		this.guiCheckOk = guiCheckOk;
 	}
-	
-	
+
+
 }

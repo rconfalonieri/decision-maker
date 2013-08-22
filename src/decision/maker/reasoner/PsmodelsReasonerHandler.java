@@ -122,8 +122,10 @@ public class PsmodelsReasonerHandler implements IReasonerHandler {
 		}
 		if (Statics.DEBUG_PSMODELS_REASONER) {
 			System.out.println("optimisticDecisionMakingToLP() program is: "+psmodelsEnconding);
-			Statics.add("Generated program is: "+psmodelsEnconding);
+			
 		}
+		if (Statics.GUI_DETAILS)
+			Statics.add("Generated program is: "+psmodelsEnconding);
 		return psmodelsEnconding;
 	}
 
@@ -149,8 +151,10 @@ public class PsmodelsReasonerHandler implements IReasonerHandler {
 		}
 		if (Statics.DEBUG_PSMODELS_REASONER) {
 			System.out.println("pessimisticDecisionMakingToLP() program is: "+psmodelsEnconding);
-			Statics.add("Generated program is: "+psmodelsEnconding);
+			
 		}
+		if (Statics.GUI_DETAILS)
+			Statics.add("Generated program is: "+psmodelsEnconding);
 		return psmodelsEnconding;
 	}
 
@@ -171,13 +175,15 @@ public class PsmodelsReasonerHandler implements IReasonerHandler {
 		try {
 			Statics.changePermissions(new String[]{"lparse", "psmodels"},PATH_REASONER_RESOURCES);
 		} catch (IOException e) {
-			System.out.println("changePermissions exception");
+			if (Statics.DEBUG_PSMODELS_REASONER)
+				System.out.println("changePermissions exception");
 			e.printStackTrace();
 		}
 		ManageASPInputFile manage = new ManageASPInputFile(PATH_REASONER_RESOURCES, "decision-making.lp");
 		vector = manage.invokeAndCreateInput(PATH_LPARSE,PATH_REASONER);
 		
-		System.out.println("after invoking lparse and psmodels");
+		if (Statics.DEBUG_PSMODELS_REASONER)
+			System.out.println("after invoking lparse and psmodels");
 		
 		return vector;
 	}
