@@ -53,7 +53,9 @@ public class DLVReasonerHandler implements IReasonerHandler {
 			if (URL_RESOURCES!=null) {
 				if (Statics.DEBUG_DLV_REASONER)
 					System.out.println(URL_RESOURCES.toString());
-				String tmp = URL_RESOURCES.toString().replace("rsrc:","").replace("file:","");
+				//String tmp = URL_RESOURCES.toString().replace("rsrc:","").replace("file:","");
+				String tmp = URL_RESOURCES.toString().replace("rsrc:","").replace("file:","").replace("jar:", "").replace("decision-maker.jar!", "");
+				
 				//absolutePath = new File(tmp);
 				absolutePath = new File(tmp.substring(0, tmp.length()-12));
 				//tmpPath = URL_RESOURCES.toString();	
@@ -96,8 +98,8 @@ public class DLVReasonerHandler implements IReasonerHandler {
 			//Statics.add("DLVHanlder()->PATH_RESOURCES "+PATH_RESOURCES);
 
 			if (os.indexOf("win") >= 0) {
-				PATH_REASONER = PATH_RESOURCES+"/dlv/windows/dlv.exe";
-				PATH_REASONER_RESOURCES = PATH_RESOURCES+"/dlv"; 
+				PATH_REASONER = PATH_RESOURCES+"\\dlv\\windows\\dlv.exe";
+				PATH_REASONER_RESOURCES = PATH_RESOURCES+"\\dlv"; 
 			}
 			if (os.indexOf("mac") >= 0) {
 				PATH_REASONER = PATH_RESOURCES+"/dlv/mac/./dlv";
