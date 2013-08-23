@@ -58,13 +58,13 @@ public class DecisionPanel implements ActionListener {
 		// Creating the prompts :
 		kPrompt = new DecisionPrompt("Knowledge",
 				"Enter or load knowledge/certainty:",
-				"Rules  / certainty levels :", true);
+				"Rules  / certainty levels :", true,pan);
 		gPrompt = new DecisionPrompt("Preferences",
 				"Enter or load preferences/priority :",
-				"Preferences / priorities :", true);
+				"Preferences / priorities :", true,pan);
 		xPrompt = new DecisionPrompt("Decisions",
 				"Enter or load your decisions :",
-				"Decisions :", false);
+				"Decisions :", false,pan);
 
 
 		// Creating the Command pane :

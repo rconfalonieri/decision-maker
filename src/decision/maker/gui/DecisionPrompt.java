@@ -13,7 +13,7 @@ import javax.swing.event.*;
 
 import decision.maker.handler.Knowledge;
 
-public class DecisionPrompt extends JPanel implements KeyListener,MouseListener,CaretListener {
+public class DecisionPrompt extends JPanel implements KeyListener,MouseListener {
 
 	// Position of the caret on the textfield :
 	private int caret = 0;
@@ -22,6 +22,7 @@ public class DecisionPrompt extends JPanel implements KeyListener,MouseListener,
 	protected JList weightList;
 	protected JTextField textField;
 	protected JTextField weightField;
+	private JPanel panel;
 
 	// Lists we use to display in the JLists :
 	public DefaultListModel formulas = new DefaultListModel();
@@ -32,10 +33,11 @@ public class DecisionPrompt extends JPanel implements KeyListener,MouseListener,
 
 	// BUILDER :
 
-	public DecisionPrompt(String name, String inputLabelText, String outputLabelText, boolean weights) {
+	public DecisionPrompt(String name, String inputLabelText, String outputLabelText, boolean weights, JPanel pan) {
 
 		// Setting up the variables :
 		hasWeights = weights;
+		panel = pan;
 
 		TitledBorder promptTitle = BorderFactory.createTitledBorder(name);
 
@@ -90,7 +92,7 @@ public class DecisionPrompt extends JPanel implements KeyListener,MouseListener,
 
 		textField = new JTextField(20);
 		textField.addKeyListener(this);
-		textField.addCaretListener(this);
+
 
 		if (hasWeights) {
 			textField.setColumns(18);
@@ -128,24 +130,35 @@ public class DecisionPrompt extends JPanel implements KeyListener,MouseListener,
 
 	public void keyTyped(KeyEvent e) {
 
-
+		boolean weightCheckOk = true;
 		if (e.getKeyChar() == '\n' && (textField.isFocusOwner() || weightField.isFocusOwner())) {
 			String newFormula = textField.getText();
-			String newWeight = ""; // To abuse Java :)
+			String newWeight = ""; 
 
 			// Extracting the new weight from the field :
-			if (hasWeights) {newWeight = weightField.getText();}
+			if (hasWeights) {
+				newWeight = weightField.getText();
+				double weight = Double.valueOf(newWeight);
+				if (weight <=0.0 || weight > 1.0) {
+					JOptionPane.showMessageDialog(panel, "A weight cannot be <= 0 or > 1!");
+					weightCheckOk = false;
+				}
+			}
 
 			// If there is an error, do nothing :
-			if (newFormula.length()!=0 && (!this.hasWeights || newWeight.length()!=0)) { // TODO Set the security test - cf. Knowledge class.
+			if (newFormula.length()!=0 && (!this.hasWeights || newWeight.length()!=0) && weightCheckOk) { 
 				// Appending the new formuls and eventually weight to the list :
 				formulas.addElement(newFormula);
-				if (hasWeights) {weightsL.addElement(newWeight);}
+				if (hasWeights) {
+					weightsL.addElement(newWeight);
+				}
 
 				// Setting the fileds for the next input :
 				textField.setText("");
 				textField.requestFocusInWindow();
-				if (hasWeights) {weightField.setText("1.0");}
+				if (hasWeights) {
+					weightField.setText("1.0");
+					}
 			}
 		}
 
@@ -192,10 +205,22 @@ public class DecisionPrompt extends JPanel implements KeyListener,MouseListener,
 					JOptionPane.CLOSED_OPTION,
 					JOptionPane.INFORMATION_MESSAGE,
 					null);
+			boolean weightCheckOk = true;
 			if (hasWeights) {
-				weightsL.set(i,formEdit.wField.getText());
+				if (formEdit.wField.getText()!=null) {
+					double weight = Double.valueOf(formEdit.wField.getText());
+					if (weight <=0.0 || weight > 1.0) {
+						JOptionPane.showMessageDialog(panel, "A weight cannot be <= 0 or > 1!");
+						weightCheckOk = false;
+					}
+					else 
+						weightsL.set(i,formEdit.wField.getText());
+
+				}
+
 			}
-			formulas.set(i,formEdit.formField.getText()); 
+			if (weightCheckOk)
+				formulas.set(i,formEdit.formField.getText()); 
 		}
 
 	}
