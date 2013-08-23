@@ -93,21 +93,22 @@ public class DecisionMaker extends Agent {
 				//"System time" is the time spent running OS code on behalf of your application (such as for I/O).
 				long taskSystemTimeNano  = Statics.getSystemTime( ) - startSystemTimeNano;
 				
-				Statics.add("*********");
+				Statics.add("***********************");
 				Statics.add("Execution time:");
 				
-				Statics.add("You have waited for (nanosecs): "+taskTimeNano);
-				Statics.add("You have waited for (millisecs): "+TimeUnit.MILLISECONDS.convert(taskTimeNano, TimeUnit.NANOSECONDS));
+				//Statics.add("You have waited for (nanosecs): "+taskTimeNano);
+				Statics.add("You have waited for "+TimeUnit.MILLISECONDS.convert(taskTimeNano, TimeUnit.NANOSECONDS)+" (millisecs)");
 				
-				Statics.add("Total time spent by the CPU (nanosecs): "+taskCpuTimeNano);
-				Statics.add("Total time spent by the CPU (millisecs): "+TimeUnit.MILLISECONDS.convert(taskCpuTimeNano, TimeUnit.NANOSECONDS));
+				//Statics.add("Total time spent for computing the optimal decision(s) (nanosecs): "+taskCpuTimeNano);
+				Statics.add("Total time spent for computing the optimal decision(s) "+TimeUnit.MILLISECONDS.convert(taskCpuTimeNano, TimeUnit.NANOSECONDS)+" (millisecs)");
 				
-				Statics.add("User computation time (nanosecs): "+taskUserTimeNano);
-				Statics.add("User computation time (millisecs): "+TimeUnit.MILLISECONDS.convert(taskUserTimeNano, TimeUnit.NANOSECONDS));
+				//Statics.add("User computation time (nanosecs): "+taskUserTimeNano);
+				//Statics.add("User computation time (millisecs): "+TimeUnit.MILLISECONDS.convert(taskUserTimeNano, TimeUnit.NANOSECONDS));
 				
-				Statics.add("Total System computation time (nanosecs): "+taskSystemTimeNano);
-				Statics.add("Total System computation time (millisecs): "+TimeUnit.MILLISECONDS.convert(taskSystemTimeNano, TimeUnit.NANOSECONDS));
+				//Statics.add("Total System computation time (nanosecs): "+taskSystemTimeNano);
+				//Statics.add("Total System computation time (millisecs): "+TimeUnit.MILLISECONDS.convert(taskSystemTimeNano, TimeUnit.NANOSECONDS));
 				
+				Statics.add("***********************");
 			}
 			else 
 				guiCheckOkDM = false;
