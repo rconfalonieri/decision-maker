@@ -2,6 +2,7 @@ package decision.maker;
 
 import global.Statics;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -66,6 +67,11 @@ public class DecisionMaker extends Agent {
 
 			if (decisionMakerHandler.isGuiCheckOk()) {
 
+				long startTimeNano = System.nanoTime( );
+				long startCpuTimeNano = Statics.getCpuTime();
+				long startSystemTimeNano = Statics.getSystemTime( );
+				long startUserTimeNano   = Statics.getUserTime( );
+				
 				if (decisionType==0) {
 					Statics.add("********Decision Maker->computePessimisticDecisionUnderUncertainty()********");
 					//Statics.add("********Decision Maker->using the "++" solver");
@@ -77,6 +83,31 @@ public class DecisionMaker extends Agent {
 					bestDecision = decisionMakerHandler.computeOptimisticDecisionUnderUncertainty();
 					Statics.add("********Decision Maker->computeOptimisticDecisionUnderUncertainty()********");
 				}
+				
+				//"Wall clock time" is the real-world elapsed time experienced by a user waiting for a task to complete
+				long taskTimeNano  = System.nanoTime( ) - startTimeNano;
+				//"CPU time" is user time plus system time. It's the total time spent using a CPU for your application.
+				long taskCpuTimeNano    = Statics.getCpuTime() - startCpuTimeNano;
+				//User time" is the time spent running your application's own code.
+				long taskUserTimeNano    = Statics.getUserTime( ) - startUserTimeNano;
+				//"System time" is the time spent running OS code on behalf of your application (such as for I/O).
+				long taskSystemTimeNano  = Statics.getSystemTime( ) - startSystemTimeNano;
+				
+				Statics.add("*********");
+				Statics.add("Execution time:");
+				
+				Statics.add("You have waited for (nanosecs): "+taskTimeNano);
+				Statics.add("You have waited for (millisecs): "+TimeUnit.MILLISECONDS.convert(taskTimeNano, TimeUnit.NANOSECONDS));
+				
+				Statics.add("Total time spent by the CPU (nanosecs): "+taskCpuTimeNano);
+				Statics.add("Total time spent by the CPU (millisecs): "+TimeUnit.MILLISECONDS.convert(taskCpuTimeNano, TimeUnit.NANOSECONDS));
+				
+				Statics.add("User computation time (nanosecs): "+taskUserTimeNano);
+				Statics.add("User computation time (millisecs): "+TimeUnit.MILLISECONDS.convert(taskUserTimeNano, TimeUnit.NANOSECONDS));
+				
+				Statics.add("Total System computation time (nanosecs): "+taskSystemTimeNano);
+				Statics.add("Total System computation time (millisecs): "+TimeUnit.MILLISECONDS.convert(taskSystemTimeNano, TimeUnit.NANOSECONDS));
+				
 			}
 			else 
 				guiCheckOkDM = false;

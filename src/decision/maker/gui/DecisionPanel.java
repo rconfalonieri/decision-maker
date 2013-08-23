@@ -447,7 +447,8 @@ public class DecisionPanel implements ActionListener {
 		String defaultDirectory = null;
 		String os = System.getProperty("os.name").toLowerCase();
 		if (os.indexOf("win") >= 0) {
-			fileContents = getClass().getResource("\\resources\\default.txt").toString();
+			System.out.println(getClass().getResource(System.getProperty("file.separator")+"resources"+System.getProperty("file.separator")+"default.txt"));
+			fileContents = getClass().getResource(System.getProperty("file.separator")+"resources"+System.getProperty("file.separator")+"default.txt").toString();
 
 			if (fileContents!=null) {
 				
