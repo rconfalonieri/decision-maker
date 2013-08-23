@@ -48,14 +48,14 @@ public class DLVReasonerHandler implements IReasonerHandler {
 
 		//if windows
 		if (os.indexOf("win") >= 0) {
-			URL_RESOURCES = getClass().getResource("\\resources\\default.txt");
+			URL_RESOURCES = getClass().getClassLoader().getResource("resources"+System.getProperty("file.separator")+"default.txt");
 
 			if (URL_RESOURCES!=null) {
 				if (Statics.DEBUG_DLV_REASONER)
 					System.out.println(URL_RESOURCES.toString());
 				String tmp = URL_RESOURCES.toString().replace("rsrc:","").replace("file:","");
 				//absolutePath = new File(tmp);
-				absolutePath = new File(tmp.substring(0, tmp.length()-13));
+				absolutePath = new File(tmp.substring(0, tmp.length()-12));
 				//tmpPath = URL_RESOURCES.toString();	
 				tmpPath = absolutePath.getAbsolutePath();
 			}
@@ -96,8 +96,8 @@ public class DLVReasonerHandler implements IReasonerHandler {
 			//Statics.add("DLVHanlder()->PATH_RESOURCES "+PATH_RESOURCES);
 
 			if (os.indexOf("win") >= 0) {
-				PATH_REASONER = PATH_RESOURCES+"\\dlv\\windows\\dlv.exe";
-				PATH_REASONER_RESOURCES = PATH_RESOURCES+"\\dlv"; 
+				PATH_REASONER = PATH_RESOURCES+System.getProperty("file.separator")+"dlv"+System.getProperty("file.separator")+"windows"+System.getProperty("file.separator")+"dlv.exe";
+				PATH_REASONER_RESOURCES = PATH_RESOURCES+System.getProperty("file.separator")+"dlv"; 
 			}
 			if (os.indexOf("mac") >= 0) {
 				PATH_REASONER = PATH_RESOURCES+"/dlv/mac/./dlv";
