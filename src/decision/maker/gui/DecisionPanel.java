@@ -447,8 +447,8 @@ public class DecisionPanel implements ActionListener {
 		String defaultDirectory = null;
 		String os = System.getProperty("os.name").toLowerCase();
 		if (os.indexOf("win") >= 0) {
-			System.out.println(getClass().getClassLoader().getResource("resources"+System.getProperty("file.separator")+"default.txt"));
-			fileContents = getClass().getClassLoader().getResource("resources"+System.getProperty("file.separator")+"default.txt").toString();
+			//System.out.println(getClass().getClassLoader().getResource("resources/default.txt"));
+			fileContents = getClass().getClassLoader().getResource("resources/default.txt").toString();
 
 			if (fileContents!=null) {
 				
@@ -457,6 +457,7 @@ public class DecisionPanel implements ActionListener {
 				absolutePath = new File(tmp.substring(0, tmp.length()-12));
 				//tmpPath = URL_RESOURCES.toString();	
 				defaultDirectory = absolutePath.getAbsolutePath();
+				//System.out.println(defaultDirectory);
 			}
 		}
 		//if mac
