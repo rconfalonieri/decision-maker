@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadMXBean;
 import java.util.Vector;
 
 public class Statics {
@@ -46,6 +48,27 @@ public class Statics {
 			p = Runtime.getRuntime().exec(run,null,new File(reasonerPath));
 		}
 		//System.out.println("Permissions changed");
+	}
+	
+	/** Get CPU time in nanoseconds. */
+	public static long getCpuTime( ) {
+	    ThreadMXBean bean = ManagementFactory.getThreadMXBean( );
+	    return bean.isCurrentThreadCpuTimeSupported( ) ?
+	        bean.getCurrentThreadCpuTime( ) : 0L;
+	}
+	 
+	/** Get user time in nanoseconds. */
+	public static long getUserTime( ) {
+	    ThreadMXBean bean = ManagementFactory.getThreadMXBean( );
+	    return bean.isCurrentThreadCpuTimeSupported( ) ?
+	        bean.getCurrentThreadUserTime( ) : 0L;
+	}
+
+	/** Get system time in nanoseconds. */
+	public  static long getSystemTime( ) {
+	    ThreadMXBean bean = ManagementFactory.getThreadMXBean( );
+	    return bean.isCurrentThreadCpuTimeSupported( ) ?
+	        (bean.getCurrentThreadCpuTime( ) - bean.getCurrentThreadUserTime( )) : 0L;
 	}
 
 	
